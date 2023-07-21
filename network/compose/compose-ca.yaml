@@ -1,0 +1,110 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: "3.7"
+
+networks:
+  test:
+    name: fabric_test
+
+services:
+  ca_orgexporter:
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orgexporter
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=4019
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:4020
+    ports:
+      - "4019:4019"
+      - "4020:4020"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/orgexporter:/etc/hyperledger/fabric-ca-server
+    container_name: ca_orgexporter
+    networks:
+      - test
+
+  ca_orgyccu:
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orgyccu
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=4021
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:4022
+    ports:
+      - "4021:4021"
+      - "4022:4022"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/orgyccu:/etc/hyperledger/fabric-ca-server
+    container_name: ca_orgyccu
+    networks:
+      - test
+  ca_orgethiocta:
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orgethiocta
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=4023
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:4024
+    ports:
+      - "4023:4023"
+      - "4024:4024"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/orgethiocta:/etc/hyperledger/fabric-ca-server
+    container_name: ca_orgethiocta
+    networks:
+      - test
+
+  ca_orgsupplier:
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orgsupplier
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=4025
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:4026
+    ports:
+      - "4025:4025"
+      - "4026:4026"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/orgsupplier:/etc/hyperledger/fabric-ca-server
+    container_name: ca_orgsupplier
+    networks:
+      - test
+
+  ca_orderer:
+    image: hyperledger/fabric-ca:latest
+    labels:
+      service: hyperledger-fabric
+    environment:
+      - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
+      - FABRIC_CA_SERVER_CA_NAME=ca-orderer
+      - FABRIC_CA_SERVER_TLS_ENABLED=true
+      - FABRIC_CA_SERVER_PORT=4027
+      - FABRIC_CA_SERVER_OPERATIONS_LISTENADDRESS=0.0.0.0:4028
+    ports:
+      - "4027:4027"
+      - "4028:4028"
+    command: sh -c 'fabric-ca-server start -b admin:adminpw -d'
+    volumes:
+      - ../organizations/fabric-ca/ordererOrg:/etc/hyperledger/fabric-ca-server
+    container_name: ca_orderer
+    networks:
+      - test

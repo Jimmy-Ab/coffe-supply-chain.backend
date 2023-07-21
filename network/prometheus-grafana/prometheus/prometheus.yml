@@ -1,0 +1,31 @@
+global:
+  scrape_interval: 1s
+  external_labels:
+    monitor: "devopsage-monitor"
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:4029"]
+  - job_name: "orderer"
+    static_configs:
+      - targets: ["orderer.adey-meselesh.de:4002"]
+  - job_name: "peer0_orgexporter"
+    static_configs:
+      - targets: ["peer0.orgexporter.adey-meselesh.de:4005"]
+  - job_name: "peer0_orgyccu"
+    static_configs:
+      - targets: ["peer0.orgyccu.adey-meselesh.de:4008"]
+  - job_name: "peer0_orgethiocta"
+    static_configs:
+      - targets: ["peer0.orgethiocta.adey-meselesh.de:4011"]
+  - job_name: "peer0_orgsupplier"
+    static_configs:
+      - targets: ["peer0.orgsupplier.adey-meselesh.de:4014"]
+  - job_name: cadvisor
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["cadvisor:4035"]
+  - job_name: node
+    static_configs:
+      - targets: ["node-exporter:4036"]
